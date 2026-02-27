@@ -1,6 +1,6 @@
 import React from "react";
 
-const DashboarOverview = () => {
+const DashboardOverview = () => {
   return (
     <div>
       <h1>Dashboard Overview</h1>
@@ -8,4 +8,4 @@ const DashboarOverview = () => {
   );
 };
 
-export default DashboarOverview;
+export default DashboardOverview;
