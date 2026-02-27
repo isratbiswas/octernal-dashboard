@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import React from "react";
 import type { NavItem } from "../../../lib/navItems.config";
-import { NavLink } from "react-router-dom"; // Use NavLink for automatic active state
+import { NavLink } from "react-router-dom";
 
 const iconMap: Record<string, React.ReactNode> = {
   Dashboard: <LayoutDashboard size={20} />,
@@ -48,7 +48,6 @@ const SideBarLink = ({ item }: { item: NavItem }) => {
               {iconMap[item.title] || <LayoutDashboard size={20} />}
             </span>
 
-            {/* The Text */}
             <span className="text-[14px] font-medium">{item.title}</span>
           </div>
 
@@ -64,11 +63,6 @@ const SideBarLink = ({ item }: { item: NavItem }) => {
               >
                 12+
               </span>
-            )}
-
-            {/* The "Side Line" / Indicator Dot from the image */}
-            {isActive && (
-              <div className="w-1.5 h-1.5 bg-green-400 rounded-full shadow-[0_0_8px_rgba(74,222,128,0.6)]"></div>
             )}
           </div>
         </>

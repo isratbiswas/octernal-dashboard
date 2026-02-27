@@ -16,7 +16,7 @@ const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
   );
   return (
     <div className="w-64 h-screen bg-white border-r border-gray-100 flex flex-col p-6 font-sans">
-      <div className="flex items-center gap-2 mb-10">
+      <div className="flex ml-5 items-center gap-2 mb-10">
         <div className="w-8 h-8 bg-[#1B4D3E] rounded-full flex items-center justify-center p-1.5">
           <div className="w-full h-full border-2 border-white rounded-full border-t-transparent" />
         </div>
@@ -27,7 +27,7 @@ const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
 
       <div className="flex-1 overflow-y-auto">
         {/* MENU SECTION */}
-        <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-4">
+        <p className="text-[10px] font-bold ml-5 text-gray-400 tracking-[0.2em] mb-4">
           MENU
         </p>
         <nav className="space-y-1 mb-8">
@@ -37,7 +37,7 @@ const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
         </nav>
 
         {/* GENERAL SECTION */}
-        <p className="text-[10px] font-bold text-gray-400 tracking-[0.2em] mb-4">
+        <p className="text-[10px] ml-5 font-bold text-gray-400 tracking-[0.2em] mb-4">
           GENERAL
         </p>
         <nav className="space-y-1">
@@ -62,11 +62,6 @@ const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
         {/* Background Decorative Circles */}
         <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-[#1B4D3E] rounded-full opacity-50 blur-xl"></div>
       </div>
-      {/* <ul>
-        {navItems.map((item) => (
-          <li key={item.href}>{item.title}</li>
-        ))}
-      </ul> */}
     </div>
   );
 };
