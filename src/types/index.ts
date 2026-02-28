@@ -5,6 +5,22 @@ export interface User {
   avatar?: string;
 }
 
+export interface AuthSate {
+  user: User | null;
+  token: string | null;
+  isAuthenticated: boolean;
+}
+
+export interface LoginCredentials {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  id: number;
+  email: string;
+  token: string;
+}
 export interface Products {
   id: string;
   name: string;
