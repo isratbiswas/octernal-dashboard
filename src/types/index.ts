@@ -5,7 +5,7 @@ export interface User {
   avatar?: string;
 }
 
-export interface AuthSate {
+export interface AuthState {
   user: User | null;
   token: string | null;
   isAuthenticated: boolean;
@@ -21,7 +21,8 @@ export interface LoginResponse {
   email: string;
   token: string;
 }
-export interface Products {
+
+export interface Project {
   id: string;
   name: string;
   dueDate: string;
@@ -29,7 +30,7 @@ export interface Products {
   icon: string;
 }
 
-export interface Users {
+export interface TeamMember {
   id: string;
   name: string;
   task: string;
