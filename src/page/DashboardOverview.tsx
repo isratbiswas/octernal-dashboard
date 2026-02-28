@@ -195,7 +195,7 @@ export function DashboardPage() {
         </div>
 
         <div className="mt-1 flex flex-col gap-2 sm:mt-2 sm:flex-row sm:items-center lg:mt-0">
-          <button className="flex items-center justify-center gap-2 rounded-xl bg-brand-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-700 active:scale-95">
+          <button className="flex items-center justify-center gap-2 rounded-full bg-green-800 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-brand-700 active:scale-95">
             <span aria-hidden>+</span>
             Add Project
           </button>

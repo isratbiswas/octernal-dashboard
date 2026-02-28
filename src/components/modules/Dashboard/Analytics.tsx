@@ -36,7 +36,6 @@ export function BarChart({ data }: { data: BarData[] }) {
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
             >
-              {/* Tooltip */}
               <div className="absolute -top-7 z-10 sm:-top-8">
                 {showTooltip && (
                   <motion.div

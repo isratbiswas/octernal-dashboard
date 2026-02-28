@@ -41,7 +41,6 @@ const SideBarLink = ({ item }: { item: NavItem }) => {
       {({ isActive }) => (
         <>
           <div className="flex items-center gap-3 z-10">
-            {/* The Icon */}
             <span
               className={`${isActive ? "text-green-800" : "text-gray-400 group-hover:text-gray-600"}`}
             >
@@ -51,7 +50,6 @@ const SideBarLink = ({ item }: { item: NavItem }) => {
             <span className="text-[14px] font-medium">{item.title}</span>
           </div>
 
-          {/* Right Side Elements: Badge OR Green Dot indicator */}
           <div className="flex items-center gap-2">
             {hasBadge && (
               <span

@@ -1,9 +1,9 @@
 import { useState, type ReactNode } from "react";
-import type { AuthSate, User } from "../types";
+import type { AuthState, User } from "../types";
 import base_api from "../lib/axios";
 import { AuthContext } from "./auth.context";
 
-export interface AuthContextType extends AuthSate {
+export interface AuthContextType extends AuthState {
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
   isLoading: boolean;
@@ -25,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       setIsLoading(true);
 
-      const { data } = await base_api.post("/login", { email, password });
+      const { data } = await base_api.post("/api/login", { email, password });
 
       const userData: User = {
         id: data.id,

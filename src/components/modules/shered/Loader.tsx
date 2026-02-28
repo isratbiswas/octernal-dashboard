@@ -18,9 +18,9 @@ const Loader = () => {
                 x2="100%"
                 y2="100%"
               >
-                <stop offset="0%" stopColor="#6366f1" /> {/* Indigo */}
-                <stop offset="50%" stopColor="#a855f7" /> {/* Purple */}
-                <stop offset="100%" stopColor="#ec4899" /> {/* Pink */}
+                <stop offset="0%" stopColor="#6366f1" />
+                <stop offset="50%" stopColor="#a855f7" />
+                <stop offset="100%" stopColor="#ec4899" />
               </linearGradient>
             </defs>
             <circle

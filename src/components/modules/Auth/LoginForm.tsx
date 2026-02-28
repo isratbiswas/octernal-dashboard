@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useId } from "react";
 import { useAuth } from "../../../context/useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { motion, AnimatePresence } from "framer-motion";
+import { Mail, Lock, Eye, EyeOff, Loader2, CheckCircle2 } from "lucide-react";
 
 const LoginForm: React.FC = () => {
   const { login, isLoading } = useAuth();
@@ -9,9 +11,8 @@ const LoginForm: React.FC = () => {
   const [password, setPassword] = useState("");
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
-
+  const patternId = useId();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setError("");
     e.preventDefault();
@@ -19,10 +20,9 @@ const LoginForm: React.FC = () => {
       await login(email, password);
       navigate("/dashboard");
       toast.success("Logged in successfully");
-      console.log("logged in");
     } catch {
       setError("Invalid email or password");
-      toast.error("Logged in Failed");
+      toast.error("Login Failed");
     }
   };
 
@@ -32,249 +32,231 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f0f13] flex items-center justify-center p-4 relative overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-violet-600/10 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 rounded-full bg-indigo-600/10 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-purple-900/5 blur-3xl" />
+    <div className="min-h-screen bg-white flex overflow-hidden font-sans">
+      <div className="hidden lg:flex lg:w-1/2 bg-[#02130a] relative flex-col justify-center items-center p-12 overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-30 pointer-events-none">
+          <svg viewBox="0 0 200 200" className="w-full h-full">
+            <motion.path
+              d="M -50 180 Q 50 20 250 180"
+              fill="none"
+              stroke="#52b788"
+              strokeWidth="0.5"
+              animate={{
+                d: [
+                  "M -50 180 Q 50 20 250 180",
+                  "M -50 160 Q 100 0 250 160",
+                  "M -50 180 Q 50 20 250 180",
+                ],
+              }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </svg>
+        </div>
 
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)`,
-            backgroundSize: "40px 40px",
-          }}
-        />
-      </div>
-
-      <div className="w-full max-w-md relative z-10">
-        <div className="flex items-center gap-3 mb-10 justify-center">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-violet-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-violet-500/25">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M9 11l3 3L22 4"
-                stroke="white"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"
-                stroke="white"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
-          <span
-            className="text-white font-semibold text-xl tracking-tight"
-            style={{ fontFamily: "'Sora', sans-serif" }}
+        <div className="relative z-10 w-full max-w-md text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="mb-8 flex justify-center"
           >
-            Taskflow
-          </span>
-        </div>
-
-        <div className="bg-[#17171f] border border-white/[0.06] rounded-2xl p-8 shadow-2xl shadow-black/40">
-          <div className="mb-8">
-            <h1
-              className="text-2xl font-bold text-white mb-1.5"
-              style={{ fontFamily: "'Sora', sans-serif" }}
-            >
-              Welcome back
-            </h1>
-            <p className="text-zinc-500 text-sm">Sign in to your workspace</p>
-          </div>
-
-          {error && (
-            <div className="mb-5 px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-2.5">
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                className="text-red-400 shrink-0"
-              >
-                <circle
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
+            <div className="w-24 h-24 bg-emerald-500/10 rounded-[2rem] border border-emerald-500/20 flex items-center justify-center backdrop-blur-sm">
+              <svg viewBox="0 0 40 40" fill="none" className="w-14 h-14">
                 <path
-                  d="M12 8v4M12 16h.01"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
+                  d="M8 15C8 8 14 6 20 6C26 6 32 8 32 15C32 25 24 34 20 34C16 34 8 25 8 15Z"
+                  stroke="#52b788"
+                  strokeWidth="3"
                 />
+                <circle cx="20" cy="18" r="3" fill="#52b788" />
               </svg>
-              <span className="text-red-400 text-sm">{error}</span>
             </div>
-          )}
+          </motion.div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="text-4xl font-bold text-white mb-4 tracking-tight"
+          >
+            Plan, Prioritize, and Accomplish.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="text-emerald-500/70 text-lg mb-12"
+          >
+            Manage your workspace and tasks with the <br /> Donezo professional
+            dashboard.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5 }}
+            className="bg-white/5 border border-white/10 p-6 rounded-3xl backdrop-blur-md text-left flex items-center gap-4 shadow-2xl"
+          >
+            <div className="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center text-white">
+              <CheckCircle2 size={24} />
+            </div>
             <div>
-              <label className="block text-zinc-400 text-xs font-medium mb-2 uppercase tracking-wider">
-                Email address
-              </label>
-              <div className="relative">
-                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <rect
-                      x="2"
-                      y="4"
-                      width="20"
-                      height="16"
-                      rx="3"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M2 8l10 6 10-6"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                  </svg>
+              <p className="text-white font-bold">Today's Productivity</p>
+              <div className="flex items-center gap-2 mt-1">
+                <div className="w-32 h-2 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div
+                    initial={{ width: 0 }}
+                    animate={{ width: "74%" }}
+                    transition={{ duration: 1.5, delay: 0.8 }}
+                    className="h-full bg-emerald-400"
+                  />
                 </div>
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@company.com"
-                  className="w-full bg-[#0f0f13] border border-white/[0.08] text-white placeholder-zinc-600 rounded-xl pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-violet-500/60 focus:bg-[#0f0f13] transition-all"
-                  required
-                />
+                <span className="text-emerald-400 text-xs font-bold">74%</span>
               </div>
             </div>
-
-            <div>
-              <div className="flex items-center justify-between mb-2">
-                <label className="text-zinc-400 text-xs font-medium uppercase tracking-wider">
-                  Password
-                </label>
-                <button
-                  type="button"
-                  className="text-xs text-violet-400 hover:text-violet-300 transition-colors"
-                >
-                  Forgot password?
-                </button>
-              </div>
-              <div className="relative">
-                <div className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <rect
-                      x="5"
-                      y="11"
-                      width="14"
-                      height="10"
-                      rx="2"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    />
-                    <path
-                      d="M8 11V7a4 4 0 018 0v4"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type={showPass ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full bg-[#0f0f13] border border-white/[0.08] text-white placeholder-zinc-600 rounded-xl pl-10 pr-11 py-3 text-sm focus:outline-none focus:border-violet-500/60 transition-all"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPass((p) => !p)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
-                >
-                  {showPass ? (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                      <line
-                        x1="1"
-                        y1="1"
-                        x2="23"
-                        y2="23"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                  ) : (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                      <path
-                        d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                      <circle
-                        cx="12"
-                        cy="12"
-                        r="3"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                      />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full mt-2 bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-semibold rounded-xl py-3 text-sm transition-all duration-200 shadow-lg shadow-violet-500/25 hover:shadow-violet-500/40 hover:-translate-y-0.5 active:translate-y-0"
-            >
-              {isLoading ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg
-                    className="animate-spin w-4 h-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                  >
-                    <circle
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeDasharray="31.4"
-                      strokeDashoffset="10"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  Signing in...
-                </span>
-              ) : (
-                "Sign in"
-              )}
-            </button>
-          </form>
-
-          <div className="mt-6 pt-6 text-center border-t border-white/[0.05]">
-            <button
-              type="button"
-              onClick={fillDemoCredentials}
-              className="text-xs text-blue-500"
-            >
-              Demo Credentials
-            </button>
-          </div>
+          </motion.div>
         </div>
       </div>
 
-      <style>{`@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');`}</style>
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-[#F8F9FA] relative">
+        <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+          <svg width="100%" height="100%">
+            <pattern
+              id={patternId}
+              patternUnits="userSpaceOnUse"
+              width="40"
+              height="40"
+              patternTransform="rotate(45)"
+            >
+              <line
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="40"
+                stroke="#1B4D3E"
+                strokeWidth="2"
+              />
+            </pattern>
+            <rect width="100%" height="100%" fill={`url(#${patternId})`} />
+          </svg>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="w-full max-w-md relative z-10"
+        >
+          <div className="flex lg:hidden items-center gap-3 mb-8 justify-center">
+            <span className="text-2xl font-bold text-gray-900 tracking-tighter">
+              Donezo
+            </span>
+          </div>
+
+          <div className="bg-white border border-gray-100 rounded-[2.5rem] p-10 shadow-[0_20px_50px_rgba(0,0,0,0.03)]">
+            <div className="mb-8 text-left">
+              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+                Welcome back
+              </h1>
+              <p className="text-gray-400 text-sm">Sign in to your dashboard</p>
+            </div>
+
+            <AnimatePresence>
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  className="mb-6 overflow-hidden"
+                >
+                  <div className="px-4 py-3 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-2.5 text-red-600 text-sm">
+                    <div className="w-1.5 h-1.5 rounded-full bg-red-500" />
+                    {error}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <label className="block text-gray-400 text-[10px] font-bold mb-2 uppercase tracking-[0.2em] ml-1">
+                  Email address
+                </label>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-[#1B4D3E] transition-colors">
+                    <Mail size={18} />
+                  </div>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@company.com"
+                    className="w-full bg-gray-50 border border-gray-100 text-gray-900 placeholder-gray-300 rounded-2xl pl-12 pr-4 py-3.5 text-sm focus:outline-none focus:border-emerald-200 focus:bg-white transition-all"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-gray-400 text-[10px] font-bold uppercase tracking-[0.2em] ml-1">
+                    Password
+                  </label>
+                  <button
+                    type="button"
+                    className="text-[11px] font-bold text-[#1B4D3E] hover:underline"
+                  >
+                    Forgot?
+                  </button>
+                </div>
+                <div className="relative group">
+                  <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-[#1B4D3E] transition-colors">
+                    <Lock size={18} />
+                  </div>
+                  <input
+                    type={showPass ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full bg-gray-50 border border-gray-100 text-gray-900 placeholder-gray-300 rounded-2xl pl-12 pr-12 py-3.5 text-sm focus:outline-none focus:border-emerald-200 focus:bg-white transition-all"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPass(!showPass)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-gray-500"
+                  >
+                    {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-[#1B4D3E] hover:bg-[#153a2f] disabled:opacity-50 text-white font-bold rounded-2xl py-4 text-sm transition-all shadow-lg flex items-center justify-center gap-2"
+              >
+                {isLoading ? (
+                  <Loader2 className="animate-spin" size={18} />
+                ) : (
+                  "Sign in to Dashboard"
+                )}
+              </motion.button>
+            </form>
+
+            <div className="mt-8 pt-8 text-center border-t border-gray-50">
+              <button
+                type="button"
+                onClick={fillDemoCredentials}
+                className="text-xs font-bold text-emerald-600 bg-emerald-50 px-4 py-2 rounded-full hover:bg-emerald-100 transition-colors"
+              >
+                Try Demo Credentials
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
