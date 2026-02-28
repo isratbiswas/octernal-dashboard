@@ -1,11 +1,23 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../context/useAuth";
 import type { NavItem } from "../../../lib/navItems.config";
 import SideBarLink from "./SideBarLink";
+import toast from "react-hot-toast";
+import { LogOut } from "lucide-react";
 
 type NavItemProps = {
   navItems: NavItem[];
 };
 
 const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    toast.success("Logged out successfully");
+    navigate("/login");
+  };
   const menuItems = navItems.filter((item) =>
     ["Dashboard", "Products", "Calendar", "Analytics", "Users"].includes(
       item.title,
@@ -45,6 +57,12 @@ const DashboardSideBarContent = ({ navItems }: NavItemProps) => {
             <SideBarLink key={item.title} item={item} />
           ))}
         </nav>
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-600 hover:bg-red-50 hover:text-red-600 transition-all w-full mt-1"
+        >
+          <LogOut size={18} /> Logout
+        </button>
       </div>
       {/* Download App Card */}
       <div className="bg-[#0A1F1A] rounded-2xl p-4 relative overflow-hidden mt-auto">

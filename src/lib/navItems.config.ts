@@ -10,10 +10,10 @@ export const getNavItems = (): NavItem[] => {
       href: "/dashboard",
     },
     { title: "Products", href: "/dashboard/products" },
+    { title: "Calendar", href: "/dashboard/calendar" },
     { title: "Analytics", href: "/dashboard/analytics" },
     { title: "Users", href: "/dashboard/users" },
-    { title: "Settings", href: "" },
-    { title: "Help", href: "" },
-    { title: "Logout", href: "" },
+    { title: "Settings", href: "/dashboard/settings" },
+    { title: "Help", href: "/dashboard/help" },
   ];
 };

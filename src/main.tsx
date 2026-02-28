@@ -3,9 +3,10 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 
 import { RouterProvider } from "react-router-dom";
-import router from "./routes/RootRouter.tsx";
+
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import { Toaster } from "react-hot-toast";
+import { router } from "./routes/RootRouter.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

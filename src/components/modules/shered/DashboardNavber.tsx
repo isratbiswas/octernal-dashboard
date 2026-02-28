@@ -1,6 +1,17 @@
 import { Search, Mail, Bell } from "lucide-react";
+import { useAuth } from "../../../context/useAuth";
 
 const DashboardNavbar = () => {
+  const { user } = useAuth();
+
+  const firstName =
+    user?.name ??
+    (user?.email === "tmichael20@mail.com"
+      ? "Totok Michael"
+      : (user?.email?.split("@")[0] ?? "User"));
+  const email = user?.email || "";
+  const initials = firstName.charAt(0).toUpperCase();
+
   return (
     <div className="w-full py-4 px-6">
       <div className="bg-[#F8F9FA] rounded-[32px] px-6 py-3 flex items-center justify-between shadow-sm border border-gray-50">
@@ -36,19 +47,15 @@ const DashboardNavbar = () => {
 
           <div className="flex items-center gap-3 pl-2 ml-2 border-l border-gray-200">
             <div className="relative">
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Michael"
-                alt="User Avatar"
-                className="w-10 h-10 rounded-full bg-red-200 object-cover"
-              />
+              <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-200 to-pink-300 flex items-center justify-center text-gray-800 text-sm font-bold shrink-0 border border-white shadow-sm">
+                {initials}
+              </div>
             </div>
             <div className="hidden md:block">
               <h4 className="text-sm font-bold text-gray-800 leading-tight">
-                Totok Michael
+                {firstName}
               </h4>
-              <p className="text-[11px] text-gray-400 font-medium">
-                tmichael20@mail.com
-              </p>
+              <p className="text-[11px] text-gray-400 font-medium">{email}</p>
             </div>
           </div>
         </div>
